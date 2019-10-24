@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem resolver</title>
+</head>
+<body>
+<form name="newRow" id="newRow">
+<table id="properties">
+    <tr>
+        <th>Prop</th>
+        <th>Negative</th>
+        <th>Bool</th>
+    </tr>
+    <tr id="newRow-tr">
+        <td><input type="text" id="objectName" name="objectName" required></td>
+        <td><input type="checkbox" id="isNegative" name="isNegative"></td>
+        <td><input type="checkbox" id="isBool" name="isBool"></td>
+        <td><input type="submit" value="+"></td>
+    </tr>
+</table>
+</form>
+</body>
+<script>
+    let index = 0;
+    newRow.onsubmit = function(e) {
+        e.preventDefault();
+        index++;
+        const tr = document.getElementById('newRow-tr');
+        tr.insertAdjacentHTML('beforebegin', '<tr id="'+index+'"><td>'+this.objectName.value+'</td><td>'
+            +(this.isNegative.checked?'V':'')+'</td><td>'+(this.isBool.checked?'V':'')
+            +'</td><td><input type="button" onclick="del(index)" value="-"></td></tr>');
+        this.reset();
+    };
+    function del(ind) {
+        document.getElementById(ind).remove();
+    }
+</script>
+</html>
