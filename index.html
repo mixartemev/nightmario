@@ -10,6 +10,7 @@
         <th>Prop</th>
         <th>Negative</th>
         <th>Bool</th>
+        <th><input type="button" value="V" onclick="fix()"></th>
     </tr>
     <tr id="newRow-tr">
         <form name="newRow" id="newRow">
@@ -20,21 +21,50 @@
         </form>
     </tr>
 </table>
+<table id="instances">
+    <tr id="props"><th>Name</th></tr>
+    <tr id="form"><td><input type="text"></td></tr>
+</table>
 </body>
 <script>
     let index = 0;
+    let props = [];
     newRow.onsubmit = e => {
         e.preventDefault();
-        index++;
         const tr = document.getElementById('newRow-tr');
         tr.insertAdjacentHTML('beforebegin', '<tr id="'+index+'"><td>'+this.objectName.value+'</td><td>'
             +(this.isNegative.checked?'V':'')+'</td><td>'+(this.isBool.checked?'V':'')
             +'</td><td><input type="button" onclick="del('+index+')" value="-"></td></tr>');
+        props[index] = ({"name": this.objectName.value, "isBool": this.isBool.checked, "isNegative": this.isNegative.checked});
+        index++;
         e.target.reset();
+        console.log(props);
     };
 
     function del(ind) {
+        props.splice(ind, 1);
         document.getElementById(ind).remove();
+        console.log(props);
+    }
+
+    function fix() {
+        const header = document.getElementById('props');
+        const form = document.getElementById('form');
+        props.forEach((prop,i) => {
+            header.innerHTML += '<th>'+prop.name+'</th>';
+            form.innerHTML += '<td><input name="prop'+i+'" type="'+(prop.isBool ? 'checkbox' : 'number')+'"></td>';
+        });
+        header.innerHTML += '<input type="button" value="Solve" onclick="solve()">';
+        form.innerHTML += '<input type="button" value="+" onclick="add(this.parentElement)">';
+    }
+
+    let ii = 0;
+    function add(e) {
+        console.log(this, e);
+        const instances = document.getElementById('instances');
+        props.forEach(prop => {
+
+        });
     }
 </script>
 </html>
