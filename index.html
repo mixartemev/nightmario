@@ -8,26 +8,41 @@
 <table id="properties">
     <tr>
         <th>Prop</th>
-        <th>Negative</th>
         <th>Bool</th>
+        <th>Negative</th>
         <th><input type="button" value="V" onclick="fix()"></th>
     </tr>
-    <tr id="newRow-tr">
+    <tr id="newPropRow">
         <form name="newRow" id="newRow">
             <td><input type="text" id="objectName" name="objectName" required></td>
-            <td><input type="checkbox" id="isNegative" name="isNegative"></td>
             <td><input type="checkbox" id="isBool" name="isBool"></td>
+            <td><input type="checkbox" id="isNegative" name="isNegative"></td>
             <td><input type="submit" value="+"></td>
         </form>
     </tr>
 </table>
-<table id="instances">
+<table id="objects">
     <tr id="props"><th>Name</th></tr>
-    <tr class="form"><td><input type="text"></td></tr>
+    <tr class="form">
+        <td><input type="text"></td>
+    </tr>
 </table>
 
-<template>
+<template id="propRowTmp">
+    <tr class="propRow">
+        <td class="propName"></td>
+        <td class="isBool"></td>
+        <td class="isNegative"></td>
+        <td class="propRemove"><input type="button" value="-"></td>
+    </tr>
+</template>
 
+<template id="objectRowTmp">
+    <tr class="objectRow">
+        <td class="propName"></td>
+        <!-- dynamic prop -->
+        <td class="objectRemove"><input type="button" value="-"></td>
+    </tr>
 </template>
 </body>
 <script>
@@ -53,7 +68,6 @@
 
     function fix() {
         const header = document.getElementById('props');
-        const form = new ;
         props.forEach((prop,i) => {
             header.innerHTML += '<th>'+prop.name+'</th>';
             form.innerHTML += '<td><input name="'+prop.name+'" type="'+(prop.isBool ? 'checkbox' : 'number')+'"></td>';
