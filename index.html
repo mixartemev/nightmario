@@ -23,8 +23,12 @@
 </table>
 <table id="instances">
     <tr id="props"><th>Name</th></tr>
-    <tr id="form"><td><input type="text"></td></tr>
+    <tr class="form"><td><input type="text"></td></tr>
 </table>
+
+<template>
+
+</template>
 </body>
 <script>
     let index = 0;
@@ -49,21 +53,22 @@
 
     function fix() {
         const header = document.getElementById('props');
-        const form = document.getElementById('form');
+        const form = new ;
         props.forEach((prop,i) => {
             header.innerHTML += '<th>'+prop.name+'</th>';
-            form.innerHTML += '<td><input name="prop'+i+'" type="'+(prop.isBool ? 'checkbox' : 'number')+'"></td>';
+            form.innerHTML += '<td><input name="'+prop.name+'" type="'+(prop.isBool ? 'checkbox' : 'number')+'"></td>';
         });
         header.innerHTML += '<input type="button" value="Solve" onclick="solve()">';
         form.innerHTML += '<input type="button" value="+" onclick="add(this.parentElement)">';
     }
 
+    let store = [];
     let ii = 0;
-    function add(e) {
-        console.log(this, e);
+    function add(f) {
         const instances = document.getElementById('instances');
-        props.forEach(prop => {
-
+        f.forEach((inp, ind) => {
+            console.log(f, i);
+            // store[ii][] =
         });
     }
 </script>
