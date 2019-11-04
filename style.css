@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#properties{
+    width: 400px;
+}
+.p-row>:nth-child(2),.p-row>:nth-child(3){
+    width: 50px;
+}
+.p-row>:first-child{
+    width: 200px;
+}
+.p-row>:last-child{
+    width: 50px;
+}
+span{
+    display: inline-block;
+}
+
+#objects{
+    display: none;
+}

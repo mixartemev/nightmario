@@ -3,62 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Problem resolver</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<table id="properties">
-    <tr>
-        <th>Prop</th>
-        <th>Bool</th>
-        <th>Negative</th>
-        <th><input type="button" value="V" onclick="fix()"></th>
-    </tr>
-    <tr id="newPropRow">
-        <form name="newRow" id="newRow">
-            <td><input type="text" id="objectName" name="objectName" required></td>
-            <td><input type="checkbox" id="isBool" name="isBool"></td>
-            <td><input type="checkbox" id="isNegative" name="isNegative"></td>
-            <td><input type="submit" value="+"></td>
-        </form>
-    </tr>
-</table>
-<table id="objects">
-    <tr id="props"><th>Name</th></tr>
-    <tr class="form">
-        <td><input type="text"></td>
-    </tr>
-</table>
 
-<template id="propRowTmp">
-    <tr class="propRow">
-        <td class="propName"></td>
-        <td class="isBool"></td>
-        <td class="isNegative"></td>
-        <td class="propRemove"><input type="button" value="-"></td>
-    </tr>
-</template>
+<div id="props">
+    <div class="p-row">
+        <span>Prop</span>
+        <span>Bool</span>
+        <span>Negative</span>
+        <button is="button-fix">Fix</button>
+    </div>
+    <form name="newRow" class="p-row">
+        <input type="text" id="objectName" name="objectName" required>
+        <input type="checkbox" id="isBool" name="isBool">
+        <input type="checkbox" id="isNegative" name="isNegative">
+        <input type="submit" value="+">
+    </form>
+</div>
 
-<template id="objectRowTmp">
-    <tr class="objectRow">
-        <td class="propName"></td>
-        <!-- dynamic prop -->
-        <td class="objectRemove"><input type="button" value="-"></td>
-    </tr>
-</template>
+<div id="objects">
+    <div id="o-header" class="row o-row"><span>Name</span></div>
+    <form id="o-form" name="newObject">
+        <input name="name" type="text">
+    </form>
+</div>
+
 </body>
+
 <script>
-    let index = 0;
-    let props = [];
-    newRow.onsubmit = e => {
-        e.preventDefault();
-        const tr = document.getElementById('newRow-tr');
-        tr.insertAdjacentHTML('beforebegin', '<tr id="'+index+'"><td>'+this.objectName.value+'</td><td>'
-            +(this.isNegative.checked?'V':'')+'</td><td>'+(this.isBool.checked?'V':'')
-            +'</td><td><input type="button" onclick="del('+index+')" value="-"></td></tr>');
-        props[index] = ({"name": this.objectName.value, "isBool": this.isBool.checked, "isNegative": this.isNegative.checked});
-        index++;
-        e.target.reset();
-        console.log(props);
-    };
 
     function del(ind) {
         props.splice(ind, 1);
@@ -67,7 +40,7 @@
     }
 
     function fix() {
-        const header = document.getElementById('props');
+        const header = document.getElementById('p-header');
         props.forEach((prop,i) => {
             header.innerHTML += '<th>'+prop.name+'</th>';
             form.innerHTML += '<td><input name="'+prop.name+'" type="'+(prop.isBool ? 'checkbox' : 'number')+'"></td>';
@@ -86,4 +59,7 @@
         });
     }
 </script>
+<script src="main.js"></script>
+<script src="components/button-fix.js"></script>
+<script src="components/row-props.js"></script>
 </html>
